@@ -1,10 +1,25 @@
 
+
+
+
 for(var i = 0; i<document.querySelectorAll(".drum").length; i ++){
 
 document.querySelectorAll(".drum")[i].addEventListener("click",function(){
-  var audio = null;
 
-  switch (this.innerHTML){
+  makeSound(this.innerHTML);
+buttonAnimation(this.innerHTML);
+});
+
+}
+document.addEventListener("keydown", function(event){
+//  console.log(event);
+makeSound(event.key);
+buttonAnimation(event.key);
+});
+
+function makeSound(key){
+    var audio = null;
+  switch (key){
 
     case 'w':
     audio = new Audio('sounds/crash.mp3');
@@ -38,6 +53,15 @@ document.querySelectorAll(".drum")[i].addEventListener("click",function(){
 
 
   }
-});
+}
 
+function buttonAnimation(currentKey) {
+
+  var activeButton = document.querySelector("." + currentKey);
+
+  activeButton.classList.add("pressed");
+
+  setTimeout(function() {
+    activeButton.classList.remove("pressed");
+  }, 100);
 }
